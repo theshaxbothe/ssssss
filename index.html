@@ -1,0 +1,199 @@
+<!doctype html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,maximum-scale=1">
+<meta name="theme-color" content="#f8f1e7">
+<title>Шахбоз & Айша — Приглашение</title>
+<style>
+*{box-sizing:border-box} html,body{margin:0;padding:0;background:#f7f0e7;color:#4b4037;font-family:Georgia,'Times New Roman',serif}
+body{min-height:100vh;display:flex;justify-content:center}
+.card{width:min(100%,620px);background:linear-gradient(180deg,#fbf8f2,#f5eadf);min-height:100vh;overflow:hidden;box-shadow:0 0 40px #00000010}
+.hero{position:relative;text-align:center;padding:0 0 26px}
+.hero img{width:100%;display:block}
+.overlay{position:absolute;inset:0;pointer-events:none;background:linear-gradient(180deg,transparent 45%,#f8f1e700 65%,#f8f1e7 100%)}
+.music{position:absolute;right:18px;top:18px;width:50px;height:50px;border-radius:50%;border:1px solid #b99a6b;background:#cdb18a;color:white;font-size:23px;box-shadow:0 5px 18px #0002;cursor:pointer}
+.content{padding:10px 24px 42px;text-align:center}
+.kicker{letter-spacing:3px;text-transform:uppercase;font-size:12px;color:#9a7a4e;margin-top:-4px}
+h1{font-size:42px;line-height:1.05;color:#9a733f;margin:12px 0 10px;font-weight:500}
+.amp{font-size:28px;color:#b38b57}
+.quote{font-size:18px;line-height:1.6;margin:18px auto 28px;max-width:460px}
+.divider{width:120px;height:1px;background:#c7aa7c;margin:22px auto;position:relative}
+.divider:after{content:'♡';position:absolute;left:50%;top:-12px;transform:translateX(-50%);background:#f8f0e6;padding:0 10px;color:#a47d4b}
+.box{border:1px solid #dfcfba;border-radius:24px;padding:22px 18px;margin:20px 0;background:#ffffff45;box-shadow:0 8px 25px #7c5d3510}
+.label{font-size:12px;letter-spacing:2px;text-transform:uppercase;color:#9d8060}
+.date{font-size:32px;color:#8e693c;margin:10px 0}
+.place{font-size:30px;color:#8e693c;margin:8px 0}
+.small{font-size:15px;line-height:1.6}
+.countdown{display:grid;grid-template-columns:repeat(4,1fr);gap:8px;margin-top:14px}
+.count{background:#fff8;border-radius:14px;padding:12px 4px;border:1px solid #e3d4c2}
+.num{font-size:25px;color:#956f40;display:block}
+.unit{font-size:10px;text-transform:uppercase;letter-spacing:1px;color:#9b8a78}
+.quran{font-size:22px;margin:24px 0 8px;color:#9b7647}
+.footer{font-size:14px;line-height:1.6;color:#7d6e61;margin-top:25px}
+@media(max-width:420px){h1{font-size:36px}.content{padding-left:17px;padding-right:17px}.date{font-size:28px}}
+
+/* Envelope opening experience */
+.envelope-screen{
+  position:fixed;inset:0;z-index:1000;display:flex;flex-direction:column;
+  align-items:center;justify-content:center;overflow:hidden;
+  background:radial-gradient(circle at 50% 40%,#fffdf8 0,#f5eadb 48%,#e6d4bc 100%);
+  transition:opacity 1s ease,visibility 1s ease;
+}
+.envelope-screen.hide{opacity:0;visibility:hidden;pointer-events:none}
+.envelope{
+  position:relative;width:300px;height:200px;cursor:pointer;
+  animation:float 3s ease-in-out infinite;
+}
+@keyframes float{0%,100%{transform:translateY(0)}50%{transform:translateY(-15px)}}
+.envelope-body{position:absolute;inset:0;background:linear-gradient(135deg,#f5e6d3 0%,#e8d4bb 100%);border-radius:8px;box-shadow:0 20px 60px rgba(0,0,0,0.3),inset 0 1px 0 rgba(255,255,255,0.3);border:1px solid #d4c4b0}
+.envelope-flap{position:absolute;top:0;left:0;right:0;height:50%;background:linear-gradient(135deg,#f0dcc8 0%,#e0cbb5 100%);clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;border-top:1px solid #d4c4b0;box-shadow:inset 0 1px 2px rgba(255,255,255,0.5)}
+.envelope.open .envelope-flap{animation:flapOpen 0.8s ease-out forwards}
+@keyframes flapOpen{0%{transform:rotateX(0deg)}100%{transform:rotateX(-160deg)}}
+.letter{position:absolute;top:50%;left:10%;right:10%;height:45%;background:white;border-radius:3px;box-shadow:0 5px 15px rgba(0,0,0,0.2);opacity:0;transform:translateY(20px)}
+.envelope.open .letter{animation:letterPop 0.6s ease-out 0.5s forwards}
+@keyframes letterPop{0%{opacity:0;transform:translateY(20px)}100%{opacity:1;transform:translateY(-30px)}}
+.letter-content{padding:15px;font-size:11px;color:#333;text-align:center}
+.letter-content strong{color:#9a733f;font-size:13px;display:block;margin-bottom:8px}
+
+.site{opacity:0;visibility:hidden;transition:opacity 0.8s ease 0.6s,visibility 0.8s ease 0.6s}
+.site-visible{opacity:1;visibility:visible}
+</style>
+</head>
+<body>
+
+<div class="envelope-screen" id="envelopeScreen">
+  <div class="envelope" id="envelope">
+    <div class="envelope-body">
+      <div class="envelope-flap"></div>
+      <div class="letter">
+        <div class="letter-content">
+          <strong>♡</strong>
+          Вы приглашены!
+        </div>
+      </div>
+    </div>
+  </div>
+  <p style="margin-top:40px;color:#9a7a4e;font-size:14px">Нажмите на конверт</p>
+</div>
+
+<audio id="music" style="display:none">
+  <source src="data:audio/wav;base64,UklGRiYAAABXQVZFZm10IBAAAAABAAEAQB8AAAB9AAACABAAZGF0YQIAAAAAAA==" type="audio/wav">
+</audio>
+
+<div class="site" id="site">
+  <div class="card">
+    <div class="hero">
+      <svg width="100%" height="300" viewBox="0 0 620 300" xmlns="http://www.w3.org/2000/svg" style="background:linear-gradient(135deg,#f5e6d3,#e8d4bb)">
+        <defs>
+          <linearGradient id="skyGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+            <stop offset="0%" style="stop-color:#e8d9cc;stop-opacity:1" />
+            <stop offset="100%" style="stop-color:#f5ead8;stop-opacity:1" />
+          </linearGradient>
+        </defs>
+        <rect width="620" height="300" fill="url(#skyGrad)"/>
+        <!-- Decorative mosque silhouette -->
+        <circle cx="100" cy="200" r="8" fill="#c7aa7c" opacity="0.3"/>
+        <circle cx="520" cy="180" r="6" fill="#c7aa7c" opacity="0.3"/>
+        <path d="M 310 120 L 320 150 L 300 150 Z" fill="#b99a6b" opacity="0.5"/>
+        <!-- Hearts -->
+        <text x="80" y="60" font-size="32" fill="#d4a574" opacity="0.4">♡</text>
+        <text x="540" y="80" font-size="28" fill="#d4a574" opacity="0.4">♡</text>
+        <text x="300" y="250" font-size="24" fill="#c7aa7c" opacity="0.3">✦</text>
+      </svg>
+      <div class="overlay"></div>
+      <div class="music" id="musicBtn">♫</div>
+    </div>
+
+    <div class="content">
+      <p class="kicker">С радостью приглашаем вас на</p>
+      
+      <h1>Шахбоз <span class="amp">&</span><br>Айша</h1>
+      
+      <p class="quote">«И из Его знамений то, что Он создал из вас самих подруг, чтобы вы находили успокоение в них»</p>
+
+      <div class="divider"></div>
+
+      <div class="box">
+        <div class="label">📅 Дата</div>
+        <div class="date">27 июля 2027</div>
+        <div class="label" style="margin-top:12px">📍 Место</div>
+        <div class="place">Культурный центр</div>
+        <div class="small" style="margin-top:14px">Время: 18:00 - 23:00</div>
+      </div>
+
+      <div class="box">
+        <div class="label">⏳ До свадьбы</div>
+        <div class="countdown">
+          <div class="count">
+            <span class="num" id="days">0</span>
+            <span class="unit">дней</span>
+          </div>
+          <div class="count">
+            <span class="num" id="hours">0</span>
+            <span class="unit">часов</span>
+          </div>
+          <div class="count">
+            <span class="num" id="mins">0</span>
+            <span class="unit">минут</span>
+          </div>
+          <div class="count">
+            <span class="num" id="secs">0</span>
+            <span class="unit">секунд</span>
+          </div>
+        </div>
+      </div>
+
+      <p class="quran">بِسْمِ اللَّهِ الرَّحْمَٰنِ الرَّحِيمِ</p>
+      
+      <div class="footer">
+        Мы будем рады видеть вас в этот особенный день!<br>
+        <strong>Пожалуйста, подтвердите присутствие</strong><br>
+        до 1 июля 2027
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const target = new Date('2027-07-27T00:00:00');
+function tick(){
+  const now = new Date();
+  let diff = target - now;
+  if(diff < 0) diff = 0;
+  const d=Math.floor(diff/86400000); diff-=d*86400000;
+  const h=Math.floor(diff/3600000); diff-=h*3600000;
+  const m=Math.floor(diff/60000); diff-=m*60000;
+  const s=Math.floor(diff/1000);
+  document.getElementById('days').textContent=String(d);
+  document.getElementById('hours').textContent=String(h).padStart(2,'0');
+  document.getElementById('mins').textContent=String(m).padStart(2,'0');
+  document.getElementById('secs').textContent=String(s).padStart(2,'0');
+}
+tick(); setInterval(tick,1000);
+
+const audio=document.getElementById('music'), btn=document.getElementById('musicBtn');
+async function startMusic(){
+  try{ await audio.play(); btn.textContent='❚❚'; btn.style.transform='rotate(2deg)'; }
+  catch(e){}
+}
+btn.addEventListener('click', async()=>{
+  if(audio.paused){await startMusic();}
+  else{audio.pause();btn.textContent='♫';btn.style.transform='none';}
+});
+
+const envelopeScreen=document.getElementById('envelopeScreen');
+const envelope=document.getElementById('envelope');
+const site=document.getElementById('site');
+let opened=false;
+envelope.addEventListener('click', async()=>{
+  if(opened) return;
+  opened=true;
+  envelope.classList.add('open');
+  setTimeout(()=>{site.classList.add('site-visible');},550);
+  setTimeout(()=>{envelopeScreen.classList.add('hide');},1300);
+  setTimeout(()=>{startMusic();},500);
+});
+</script>
+</body>
+</html>
